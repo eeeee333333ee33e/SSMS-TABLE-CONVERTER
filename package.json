@@ -1,0 +1,74 @@
+{
+  "name": "ssms-table-converter",
+  "displayName": "SSMS Table Converter",
+  "description": "Convert SSMS TSV table data directly in the active editor to JSON Array, JSON Lines, or JavaScript Array",
+  "version": "0.3.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ssms-table-converter.toJsonArray",
+        "title": "Convert to JSON Array",
+        "category": "SSMS Table Converter"
+      },
+      {
+        "command": "ssms-table-converter.toJsonLines",
+        "title": "Convert to JSON Lines",
+        "category": "SSMS Table Converter"
+      },
+      {
+        "command": "ssms-table-converter.toJsArray",
+        "title": "Convert to JavaScript Array",
+        "category": "SSMS Table Converter"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "ssms-table-converter.submenu",
+        "label": "SSMS Table Converter"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "ssms-table-converter.submenu",
+          "group": "1_modification"
+        }
+      ],
+      "ssms-table-converter.submenu": [
+        {
+          "command": "ssms-table-converter.toJsonArray",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "ssms-table-converter.toJsonLines",
+          "group": "1_actions@2"
+        },
+        {
+          "command": "ssms-table-converter.toJsArray",
+          "group": "1_actions@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "test": "npm run compile && node ./out/test/converter.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^4.0.0",
+    "typescript": "^5.3.3"
+  }
+}
